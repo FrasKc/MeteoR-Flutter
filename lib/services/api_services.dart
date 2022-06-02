@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:meteor/services/customWeatherCast.dart';
+
 import '../models/meteo.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,20 +21,10 @@ Future<Meteo> getMeteoData(String city) async {
     Wind windConvert = Wind.fromJson(jsonResponse["wind"]);
     Clouds cloudsConvert = Clouds.fromJson(jsonResponse["clouds"]);
 
-    meteo = Meteo(customCast(weather), mainConvert, windConvert, cloudsConvert,
-        jsonResponse["id"], jsonResponse["name"]);
+    meteo = Meteo(customWeatherCast(weather), mainConvert, windConvert,
+        cloudsConvert, jsonResponse["id"], jsonResponse["name"]);
   } else {
     print("Miam request failed with status: ${response.statusCode}");
   }
   return meteo;
-}
-
-List<Weather> customCast(List<dynamic> weather) {
-  List<Weather> weatherList = [];
-  for (dynamic object in weather) {
-    Weather weather = Weather(
-        object["id"], object["main"], object["description"], object["icon"]);
-    weatherList.add(weather);
-  }
-  return weatherList;
 }

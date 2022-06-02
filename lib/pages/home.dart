@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:meteor/components/generals_informatio.dart';
+import 'package:meteor/components/navDrawer.dart';
+import 'package:meteor/models/meteo_forecast.dart';
+import 'package:meteor/services/details_services.dart';
 
+import '../components/details_information.dart';
 import '../models/meteo.dart';
 import '../services/api_services.dart';
 
@@ -22,35 +26,48 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavDrawer(),
       body: SafeArea(
         minimum: EdgeInsets.only(top: 70),
-        child: FutureBuilder<Meteo>(
-          future: getMeteoData("jonage"),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: Text("Chargement..."),
-              );
-            } else if (snapshot.connectionState == ConnectionState.done) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  General_information(null, snapshot.data!),
-                  Card(
-                    child: ListTile(
-                      title: Text(snapshot.data!.name),
-                      // subtitle: Text(snapshot.data!.weather[0].description),
-                      trailing: Text((snapshot.data!.main.temp - 273.15)
-                              .toStringAsFixed(1) +
-                          "°C"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            FutureBuilder<Meteo>(
+              future: getMeteoData("jonage"),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: Text("Chargement..."),
+                  );
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  return General_information(null, snapshot.data!);
+                } else {
+                  return const Text('Erreur de chargement');
+                }
+              },
+            ),
+            FutureBuilder<Meteo_Forecast>(
+              future: getMeteoDetailsData("jonage"),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: Text("Chargement..."),
+                  );
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  return Container(
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    child: ListView(
+                      children: [
+                        Details_Information(null, snapshot.data!),
+                      ],
                     ),
-                  ),
-                ],
-              );
-            } else {
-              return const Text('Erreur de chargement');
-            }
-          },
+                  );
+                } else {
+                  return const Text('Erreur de chargement');
+                }
+              },
+            ),
+          ],
         ),
       ),
     );
