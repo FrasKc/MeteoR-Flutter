@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meteor/components/generals_informatio.dart';
 
+import '../components/details_information.dart';
 import '../models/meteo.dart';
 import '../services/api_services.dart';
 

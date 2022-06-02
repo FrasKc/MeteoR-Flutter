@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 
-class details_information extends StatefulWidget {
-  details_information({Key? key}) : super(key: key);
+import '../models/meteo.dart';
+import '../services/api_services.dart';
+
+class Details_Information extends StatefulWidget {
+  Details_Information(Key? key, this.meteo) : super(key: key,);
+  final Meteo meteo;
 
   @override
-  State<details_information> createState() => _details_informationState();
+  State<Details_Information> createState() => _Details_InformationState();
 }
 
-class _details_informationState extends State<details_information> {
+class _Details_InformationState extends State<Details_Information> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Center(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [Text("ok")],
+    ));
   }
 }
