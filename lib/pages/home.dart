@@ -24,23 +24,24 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         FutureBuilder<Meteo>(
-          future: getMeteoData("marseille"),
+          future: getMeteoData("villeurbanne"),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
-                child: Text("Sa charge !! attend wesh !!"),
+                child: Text("Chargement..."),
               );
             } else if (snapshot.connectionState == ConnectionState.done) {
               return Card(
                 child: ListTile(
                   title: Text(snapshot.data!.name),
                   // subtitle: Text(snapshot.data!.weather[0].description),
-                  trailing:
-                      Text((snapshot.data!.main.temp - 273.15).toString()),
+                  trailing: Text(
+                      (snapshot.data!.main.temp - 273.15).toStringAsFixed(1) +
+                          "°C"),
                 ),
               );
             } else {
-              return const Text('Olalala y a une erreure');
+              return const Text('Erreur de chargement');
             }
           },
         ),
