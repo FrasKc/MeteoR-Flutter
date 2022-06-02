@@ -19,11 +19,21 @@ Future<Meteo> getMeteoData(String city) async {
     Main mainConvert = Main.fromJson(jsonResponse["main"]);
     Wind windConvert = Wind.fromJson(jsonResponse["wind"]);
     Clouds cloudsConvert = Clouds.fromJson(jsonResponse["clouds"]);
-
-    meteo = Meteo(weatherList = weather.cast<Weather>(), mainConvert,
-        windConvert, cloudsConvert, jsonResponse["id"], jsonResponse["name"]);
+    weatherList = customCast(weather);
+    meteo = Meteo(weatherList, mainConvert, windConvert, cloudsConvert,
+        jsonResponse["id"], jsonResponse["name"]);
   } else {
     print("Miam request failed with status: ${response.statusCode}");
   }
   return meteo;
+}
+
+List<Weather> customCast(List<dynamic> weather) {
+  List<Weather> weatherList = [];
+  for (dynamic object in weather) {
+    Weather weather = Weather(
+        object["id"], object["main"], object["description"], object["icon"]);
+    weatherList.add(weather);
+  }
+  return weatherList;
 }
