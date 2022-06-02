@@ -15,12 +15,11 @@ Future<Meteo> getMeteoData(String city) async {
     var jsonResponse = jsonDecode(response.body);
     // List<Weather> listWeather = ConvertWeather(jsonResponse["weather"]);
     List weather = jsonResponse["weather"];
-    List<Weather> weatherList = [];
     Main mainConvert = Main.fromJson(jsonResponse["main"]);
     Wind windConvert = Wind.fromJson(jsonResponse["wind"]);
     Clouds cloudsConvert = Clouds.fromJson(jsonResponse["clouds"]);
-    weatherList = customCast(weather);
-    meteo = Meteo(weatherList, mainConvert, windConvert, cloudsConvert,
+
+    meteo = Meteo(customCast(weather), mainConvert, windConvert, cloudsConvert,
         jsonResponse["id"], jsonResponse["name"]);
   } else {
     print("Miam request failed with status: ${response.statusCode}");
