@@ -3,6 +3,7 @@ import 'package:meteor/components/generals_informatio.dart';
 import 'package:meteor/components/navDrawer.dart';
 import 'package:meteor/models/meteo_forecast.dart';
 import 'package:meteor/services/details_services.dart';
+import 'package:meteor/services/sharedPreferences.dart';
 
 import '../components/details_information.dart';
 import '../models/meteo.dart';
@@ -23,6 +24,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+  Future<String?> city = getCity();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

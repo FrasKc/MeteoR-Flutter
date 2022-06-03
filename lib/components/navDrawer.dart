@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:meteor/components/popUpWidget.dart';
+import 'package:meteor/services/sharedPreferences.dart';
 
 class NavDrawer extends StatelessWidget {
   @override
@@ -7,7 +9,7 @@ class NavDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
+          const DrawerHeader(
             child: Text(
               'Météor',
               style: TextStyle(color: Colors.white, fontSize: 25),
@@ -18,31 +20,35 @@ class NavDrawer extends StatelessWidget {
                     fit: BoxFit.fill,
                     image: AssetImage('assets/images/orage.jpg'))),
           ),
-          ListTile(
-            leading: Icon(Icons.input),
-            title: Text('Welcome'),
-            onTap: () => {},
+          ElevatedButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => PopUpCustom(context),
+              );
+            },
+            child: Text("Ajouter une ville"),
           ),
-          ListTile(
-            leading: Icon(Icons.verified_user),
-            title: Text('Profile'),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
-          ListTile(
-            leading: Icon(Icons.border_color),
-            title: Text('Feedback'),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
-          ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
+          Container(
+            height: MediaQuery.of(context).size.height,
+            child: ListView.builder(
+              itemCount: 6,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Text("ok"),
+                  trailing: Icon(
+                    Icons.location_city,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    size: 30.0,
+                  ),
+                  onTap: () async {
+                    await setCity("lyon")
+                        .then((value) => Navigator.pop(context));
+                  },
+                );
+              },
+            ),
+          )
         ],
       ),
     );

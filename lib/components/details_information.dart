@@ -24,7 +24,7 @@ class _Details_InformationState extends State<Details_Information> {
           height: 70,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: widget.meteoDetail.list!.length,
+            itemCount: 6,
             itemBuilder: (BuildContext context, int index) {
               return meteoCard(null, widget.meteoDetail.list![index]);
             },
