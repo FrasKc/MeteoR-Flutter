@@ -1,10 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:meteor/components/popUpWidget.dart';
+import 'package:meteor/database/database_helper.dart';
 import 'package:meteor/services/ActualCity.dart';
 
-class NavDrawer extends StatelessWidget {
+import '../models/city.dart';
+
+class NavDrawer extends StatefulWidget {
   NavDrawer(this.actualCity);
   final ActualCity actualCity;
+
+  @override
+  State<NavDrawer> createState() => _NavDrawerState();
+}
+
+class _NavDrawerState extends State<NavDrawer> {
+  late List<City> citysList = [];
+  void _refreshCitys() async {
+    final data = await SQLHelper.getItems();
+    setState(() {
+      citysList = data;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshCitys(); // Loading the diary when the app starts
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -23,31 +46,67 @@ class NavDrawer extends StatelessWidget {
                     image: AssetImage('assets/images/orage.jpg'))),
           ),
           ElevatedButton(
-            onPressed: () {
-              showDialog(
+            onPressed: () async {
+              final result = await showDialog(
                 context: context,
                 builder: (BuildContext context) => PopUpCustom(context),
               );
+              if (result != "") {
+                setState(() {
+                  _refreshCitys();
+                });
+              }
             },
             child: Text("Ajouter une ville"),
           ),
           Container(
             height: MediaQuery.of(context).size.height,
             child: ListView.builder(
-              itemCount: 6,
+              itemCount: citysList.length,
               itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text("ok"),
-                  trailing: Icon(
-                    Icons.location_city,
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    size: 30.0,
+                return Dismissible(
+                  key: Key(citysList[index].cityName),
+                  background: Container(color: Colors.white, child: null),
+                  secondaryBackground: Container(
+                    color: Colors.red,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: const [
+                          Icon(Icons.delete, color: Colors.white),
+                          Text('Move to trash',
+                              style: TextStyle(color: Colors.white)),
+                        ],
+                      ),
+                    ),
                   ),
-                  onTap: () async {
-                    await actualCity.city
-                        .setValue("jonage")
-                        .then((value) => Navigator.pop(context));
+                  onDismissed: (direction) async {
+                    // Remove the item from the data source.
+                    if (direction == DismissDirection.endToStart) {
+                      await SQLHelper.deleteItem(citysList[index].id);
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Successfully deleted a journal!'),
+                      ));
+                      _refreshCitys();
+                    } else {
+                      _refreshCitys();
+                      return;
+                    }
                   },
+                  child: ListTile(
+                    title: Text(citysList[index].cityName),
+                    trailing: const Icon(
+                      Icons.location_city,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      size: 30.0,
+                    ),
+                    onTap: () async {
+                      await widget.actualCity.city
+                          .setValue(citysList[index].cityName)
+                          .then((value) => Navigator.pop(context));
+                    },
+                  ),
                 );
               },
             ),

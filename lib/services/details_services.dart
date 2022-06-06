@@ -20,7 +20,6 @@ Future<Meteo_Forecast> getMeteoDetailsData(String city) async {
 
     meteoDetail = Meteo_Forecast(jsonResponse["cod"], jsonResponse["message"],
         jsonResponse["cnt"], customListDetailCast(jsonResponse["list"]), city);
-    print(jsonResponse);
   } else {
     print("Miam request failed with status: ${response.statusCode}");
   }
