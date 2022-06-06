@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:meteor/components/popUpWidget.dart';
-import 'package:meteor/services/sharedPreferences.dart';
+import 'package:meteor/services/ActualCity.dart';
 
 class NavDrawer extends StatelessWidget {
+  NavDrawer(this.actualCity);
+  final ActualCity actualCity;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -42,7 +44,8 @@ class NavDrawer extends StatelessWidget {
                     size: 30.0,
                   ),
                   onTap: () async {
-                    await setCity("lyon")
+                    await actualCity.city
+                        .setValue("jonage")
                         .then((value) => Navigator.pop(context));
                   },
                 );

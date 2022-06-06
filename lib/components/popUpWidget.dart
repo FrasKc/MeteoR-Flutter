@@ -15,11 +15,10 @@ class PopUpCustom extends StatelessWidget {
         ],
       ),
       actions: <Widget>[
-        FlatButton(
+        ElevatedButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          textColor: Theme.of(context).primaryColor,
           child: const Text('Close'),
         ),
       ],
