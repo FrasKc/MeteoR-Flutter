@@ -20,7 +20,11 @@ class _meteoCardState extends State<meteoCard> {
           child: Column(
         children: [
           Text(readTimestampHour(widget.liste.dt)),
-          Text(widget.liste.weather[0].description),
+          Image.network(
+            "http://openweathermap.org/img/wn/${widget.liste.weather[0].icon}@2x.png",
+            width: 30,
+            height: 30,
+          ),
           Text("${convertTempToString(widget.liste.main.temp)}°"),
         ],
       )),
