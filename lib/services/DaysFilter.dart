@@ -5,10 +5,10 @@ List<Liste> daysFilter(List<Liste> list) {
   late List<Liste> resultListe = [];
   late List<String> semiResult = [];
   for (Liste data in list) {
-    if (semiResult.contains(readTimestampDay(data.dt)) == false) {
+    if (semiResult.contains(readTimestampDay(data.dt)) == false &&
+        readTimestampHour(data.dt) == "14:00") {
       semiResult.add(readTimestampDay(data.dt));
       resultListe.add(data);
-      print(readTimestampDay(data.dt));
     }
   }
   return resultListe;

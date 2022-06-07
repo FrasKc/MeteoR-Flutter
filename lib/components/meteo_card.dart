@@ -14,9 +14,8 @@ class meteoCard extends StatefulWidget {
 class _meteoCardState extends State<meteoCard> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 120,
-      height: 150,
+    return SizedBox(
+      width: 100,
       child: Card(
           child: Column(
         children: [

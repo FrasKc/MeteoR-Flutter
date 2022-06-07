@@ -16,16 +16,14 @@ class Details_Information extends StatefulWidget {
 class _Details_InformationState extends State<Details_Information> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Container(
-      height: 80,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 6,
-        itemBuilder: (BuildContext context, int index) {
-          return meteoCard(null, widget.meteoDetail.list![index]);
-        },
-      ),
-    ));
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: 6,
+      itemBuilder: (BuildContext context, int index) {
+        return Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: meteoCard(null, widget.meteoDetail.list![index]));
+      },
+    );
   }
 }

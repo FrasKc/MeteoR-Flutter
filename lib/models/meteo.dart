@@ -5,15 +5,10 @@ class Meteo {
   Clouds clouds;
   int id;
   String name;
+  int cod;
 
-  Meteo(
-    this.weather,
-    this.main,
-    this.wind,
-    this.clouds,
-    this.id,
-    this.name,
-  );
+  Meteo(this.weather, this.main, this.wind, this.clouds, this.id, this.name,
+      this.cod);
 }
 
 class Weather {
