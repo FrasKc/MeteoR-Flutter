@@ -16,6 +16,7 @@ class _meteoCardState extends State<meteoCard> {
   Widget build(BuildContext context) {
     return Container(
       width: 120,
+      height: 150,
       child: Card(
           child: Column(
         children: [

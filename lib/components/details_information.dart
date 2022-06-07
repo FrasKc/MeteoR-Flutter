@@ -18,7 +18,7 @@ class _Details_InformationState extends State<Details_Information> {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
-      height: 70,
+      height: 80,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 6,
