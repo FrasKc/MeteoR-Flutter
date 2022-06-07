@@ -13,12 +13,11 @@ class PopUpCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Popup example'),
+      title: const Text('Choisissez votre ville'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Entrer une nouvelle ville"),
           TextField(
             controller: _myController,
           )
@@ -27,12 +26,11 @@ class PopUpCustom extends StatelessWidget {
       actions: <Widget>[
         ElevatedButton(
           onPressed: () async {
-            print("ok");
-
+            print("OK");
             await SQLHelper.createItem(_myController.text)
                 .then((value) => Navigator.of(context).pop("okay"));
           },
-          child: const Text('Close'),
+          child: const Text('OK'),
         ),
       ],
     );

@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
           builder: (BuildContext context, String city) {
             String city = widget.actualCity.city.getValue();
             if (city == "") {
-              return Text("okayy");
+              return Text("Aucune ville n'a été sélectionné");
             } else {
               return Expanded(
                 child: Column(

@@ -36,7 +36,7 @@ class _NavDrawerState extends State<NavDrawer> {
         children: <Widget>[
           const DrawerHeader(
             child: Text(
-              'Météor',
+              'MétéoR',
               style: TextStyle(color: Colors.white, fontSize: 25),
             ),
             decoration: BoxDecoration(
@@ -45,19 +45,21 @@ class _NavDrawerState extends State<NavDrawer> {
                     fit: BoxFit.fill,
                     image: AssetImage('assets/images/orage.jpg'))),
           ),
-          ElevatedButton(
-            onPressed: () async {
-              final result = await showDialog(
-                context: context,
-                builder: (BuildContext context) => PopUpCustom(context),
-              );
-              if (result != "") {
-                setState(() {
-                  _refreshCitys();
-                });
-              }
-            },
-            child: Text("Ajouter une ville"),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ElevatedButton(
+                onPressed: () async {
+                  final result = await showDialog(
+                    context: context,
+                    builder: (BuildContext context) => PopUpCustom(context),
+                  );
+                  if (result != "") {
+                    setState(() {
+                      _refreshCitys();
+                    });
+                  }
+                },
+                child: Text("Ajouter une ville")),
           ),
           Container(
             height: MediaQuery.of(context).size.height,

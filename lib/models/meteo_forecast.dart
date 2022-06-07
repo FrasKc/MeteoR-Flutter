@@ -30,7 +30,7 @@ class Liste {
     if (json['weather'] != null) {
       weather = <Weather>[];
       json['weather'].forEach((v) {
-        weather!.add(new Weather.fromJson(v));
+        weather.add(new Weather.fromJson(v));
       });
     }
     clouds =
