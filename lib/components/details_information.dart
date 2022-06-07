@@ -17,20 +17,15 @@ class _Details_InformationState extends State<Details_Information> {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          height: 70,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 6,
-            itemBuilder: (BuildContext context, int index) {
-              return meteoCard(null, widget.meteoDetail.list![index]);
-            },
-          ),
-        )
-      ],
+        child: Container(
+      height: 70,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: 6,
+        itemBuilder: (BuildContext context, int index) {
+          return meteoCard(null, widget.meteoDetail.list![index]);
+        },
+      ),
     ));
   }
 }
