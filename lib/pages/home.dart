@@ -5,7 +5,7 @@ import 'package:meteor/models/meteo_forecast.dart';
 import 'package:meteor/services/details_services.dart';
 import 'package:meteor/services/ActualCity.dart';
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
-
+import '../components/andré.dart';
 import '../components/details_information.dart';
 import '../models/meteo.dart';
 import '../services/api_services.dart';
@@ -36,51 +36,48 @@ class _HomePageState extends State<HomePage> {
             if (city == "") {
               return Text("Aucune ville n'a été sélectionné");
             } else {
-              return Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    FutureBuilder<Meteo>(
-                      future: getMeteoData(city),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Center(
-                            child: Text("Chargement..."),
-                          );
-                        } else if (snapshot.connectionState ==
-                            ConnectionState.done) {
-                          return General_information(null, snapshot.data!);
-                        } else {
-                          return const Text('Erreur de chargement');
-                        }
-                      },
-                    ),
-                    FutureBuilder<Meteo_Forecast>(
-                      future: getMeteoDetailsData(city),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Center(
-                            child: Text("Chargement..."),
-                          );
-                        } else if (snapshot.connectionState ==
-                            ConnectionState.done) {
-                          return Container(
-                            height: MediaQuery.of(context).size.height * 0.7,
-                            child: ListView(
-                              children: [
-                                Details_Information(null, snapshot.data!),
-                              ],
-                            ),
-                          );
-                        } else {
-                          return const Text('Erreur de chargement');
-                        }
-                      },
-                    ),
-                  ],
-                ),
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  FutureBuilder<Meteo>(
+                    future: getMeteoData(city),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: Text("Chargement..."),
+                        );
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        return General_information(null, snapshot.data!);
+                      } else {
+                        return const Text('Erreur de chargement');
+                      }
+                    },
+                  ),
+                  FutureBuilder<Meteo_Forecast>(
+                    future: getMeteoDetailsData(city),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: Text("Chargement..."),
+                        );
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        return Container(
+                          height: MediaQuery.of(context).size.height * 0.7,
+                          child: ListView(
+                            children: [
+                              Details_Information(null, snapshot.data!),
+                              Days_Informations(null, snapshot.data!),
+                            ],
+                          ),
+                        );
+                      } else {
+                        return const Text('Erreur de chargement');
+                      }
+                    },
+                  ),
+                ],
               );
             }
           },

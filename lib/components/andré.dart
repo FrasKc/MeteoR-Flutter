@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:meteor/components/meteo_card.dart';
 import 'package:meteor/models/meteo_forecast.dart';
+import 'package:meteor/services/DaysFilter.dart';
+import 'package:meteor/services/TimeStampeToString.dart';
 
 class Days_Informations extends StatefulWidget {
   Days_Informations(Key? key, this.meteoDetail)
@@ -14,29 +16,18 @@ class Days_Informations extends StatefulWidget {
 }
 
 class _Days_InformationsState extends State<Days_Informations> {
+  late List<Liste> data = daysFilter(widget.meteoDetail.list!);
   @override
   Widget build(BuildContext context) {
-    print(widget.meteoDetail);
     return Center(
       child: Container(
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            Builder(
-              builder: (BuildContext context) {
-                return Center(
-                  child: TextButton(
-                    onPressed: () {
-                      print(Scaffold.of(context).hasAppBar);
-                    },
-                    child: Text('hasAppBar'),
-                  ),
-                );
-              },
-            )
-          ],
-        ),
-      ),
+          height: MediaQuery.of(context).size.height,
+          child: ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Card(child: Text(readTimestampDay(data[index].dt)));
+            },
+          )),
     );
   }
 }
