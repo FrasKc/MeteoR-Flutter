@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(
-                "https://www.tvqc.com/wp-content/uploads/2015/06/tumblr_nq98q9gU9w1smjc75o1_500.gif"),
+                "https://i.pinimg.com/originals/0e/f3/bb/0ef3bb66d9216fffcea9022628f7bb26.gif"),
             fit: BoxFit.cover,
           ),
         ),
