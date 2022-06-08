@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:meteor/components/meteo_card.dart';
 import 'package:meteor/models/meteo_forecast.dart';
 import 'package:meteor/services/DaysFilter.dart';
@@ -35,7 +36,11 @@ class _Days_InformationsState extends State<Days_Informations> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(readTimestampDay(data[index].dt)),
+                      Text(readTimestampDay(data[index].dt),
+                          style: GoogleFonts.lato(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                              color: Color.fromARGB(255, 255, 255, 255))),
                       Image.network(
                         "http://openweathermap.org/img/wn/${data[index].weather[0].icon}@2x.png",
                         width: 30,
@@ -47,12 +52,20 @@ class _Days_InformationsState extends State<Days_Informations> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                                "${convertTempToString(data[index].main.feelsLike)}°"),
+                                "${convertTempToString(data[index].main.feelsLike)}°",
+                                style: GoogleFonts.lato(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color.fromARGB(255, 255, 255, 255))),
                             Container(
                                 child: Row(
                               children: [
-                                Text(
-                                    "${data[index].main.humidity.toString()}%"),
+                                Text("${data[index].main.humidity.toString()}%",
+                                    style: GoogleFonts.lato(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w400,
+                                        color: Color.fromARGB(
+                                            255, 255, 255, 255))),
                                 SizedBox(width: 10),
                                 Image.network(
                                     "https://cdn-icons-png.flaticon.com/512/850/850785.png",
@@ -65,7 +78,11 @@ class _Days_InformationsState extends State<Days_Informations> {
                       )
                     ],
                   ),
-                  Text(data[index].weather[0].description),
+                  Text(data[index].weather[0].description,
+                      style: GoogleFonts.lato(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w400,
+                          color: Color.fromARGB(255, 255, 255, 255))),
                 ],
               ),
             ));

@@ -42,7 +42,7 @@ class _NavDrawerState extends State<NavDrawer> {
               style: TextStyle(color: Colors.white, fontSize: 25),
             ),
             decoration: BoxDecoration(
-                color: Colors.green,
+                color: Color.fromARGB(255, 255, 255, 255),
                 image: DecorationImage(
                     fit: BoxFit.fill,
                     image: AssetImage('assets/images/orage.jpg'))),
@@ -71,7 +71,7 @@ class _NavDrawerState extends State<NavDrawer> {
                 return Dismissible(
                   key: Key(citysList[index].cityName),
                   background: Container(
-                    color: Color.fromARGB(120, 244, 67, 54),
+                    color: Color.fromARGB(120, 252, 43, 28),
                     child: Padding(
                       padding: const EdgeInsets.all(15),
                       child: Row(
@@ -85,7 +85,7 @@ class _NavDrawerState extends State<NavDrawer> {
                     ),
                   ),
                   secondaryBackground: Container(
-                    color: Color.fromARGB(120, 244, 67, 54),
+                    color: Color.fromARGB(120, 252, 43, 28),
                     child: Padding(
                       padding: const EdgeInsets.all(15),
                       child: Row(

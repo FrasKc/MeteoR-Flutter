@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage("https://s8.gifyu.com/images/Fond3.gif"),
+            image: AssetImage('assets/images/fond.gif'),
             fit: BoxFit.cover,
           ),
         ),
@@ -118,14 +118,16 @@ class _HomePageState extends State<HomePage> {
                                                 const Icon(
                                                     Icons.watch_later_outlined,
                                                     color: Colors.white),
-                                                Text("Hour by hour forecast",
+                                                Text(" Hour by hour forecast",
                                                     style: GoogleFonts.lato(
                                                         fontSize: 20,
                                                         fontWeight:
                                                             FontWeight.w400,
-                                                        color: const Color
-                                                                .fromARGB(
-                                                            255, 0, 0, 0)))
+                                                        color: Color.fromARGB(
+                                                            255,
+                                                            255,
+                                                            255,
+                                                            255)))
                                               ],
                                             )),
                                             Container(
@@ -157,14 +159,16 @@ class _HomePageState extends State<HomePage> {
                                                   const Icon(
                                                       Icons.calendar_month,
                                                       color: Colors.white),
-                                                  Text("5 day forecast",
+                                                  Text(" 5 day forecast",
                                                       style: GoogleFonts.lato(
                                                           fontSize: 20,
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          color: const Color
-                                                                  .fromARGB(
-                                                              255, 0, 0, 0)))
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              255,
+                                                              255,
+                                                              255)))
                                                 ],
                                               ),
                                               SizedBox(
