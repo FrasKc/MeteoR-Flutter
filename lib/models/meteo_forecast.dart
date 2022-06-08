@@ -1,11 +1,11 @@
-class Meteo_Forecast {
+class MeteoForecast {
   String? cod;
   int? message;
   int? cnt;
   List<Liste>? list;
   City? city;
 
-  Meteo_Forecast(this.cod, this.message, this.cnt, this.list, this.city);
+  MeteoForecast(this.cod, this.message, this.cnt, this.list, this.city);
 }
 
 class Liste {
@@ -26,20 +26,19 @@ class Liste {
 
   Liste.fromJson(Map<String, dynamic> json) {
     dt = json['dt'];
-    main = (json['main'] != null ? new Main.fromJson(json['main']) : null)!;
+    main = (json['main'] != null ? Main.fromJson(json['main']) : null)!;
     if (json['weather'] != null) {
       weather = <Weather>[];
       json['weather'].forEach((v) {
-        weather.add(new Weather.fromJson(v));
+        weather.add(Weather.fromJson(v));
       });
     }
-    clouds =
-        (json['clouds'] != null ? new Clouds.fromJson(json['clouds']) : null)!;
-    wind = (json['wind'] != null ? new Wind.fromJson(json['wind']) : null)!;
+    clouds = (json['clouds'] != null ? Clouds.fromJson(json['clouds']) : null)!;
+    wind = (json['wind'] != null ? Wind.fromJson(json['wind']) : null)!;
     visibility = json['visibility'];
     pop = json['pop'];
-    rain = (json['rain'] != null ? new Rain.fromJson(json['rain']) : null)!;
-    sys = (json['sys'] != null ? new Sys.fromJson(json['sys']) : null)!;
+    rain = (json['rain'] != null ? Rain.fromJson(json['rain']) : null)!;
+    sys = (json['sys'] != null ? Sys.fromJson(json['sys']) : null)!;
     dtTxt = json['dt_txt'];
   }
 }
@@ -117,7 +116,7 @@ class Rain {
   Rain({this.d3h});
 
   Rain.fromJson(Map<String, dynamic> json) {
-    d3h = json['3h'];
+    d3h = json['3h'].toDouble();
   }
 }
 
@@ -147,7 +146,7 @@ class City {
   City.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    coord = (json['coord'] != null ? new Coord.fromJson(json['coord']) : null)!;
+    coord = (json['coord'] != null ? Coord.fromJson(json['coord']) : null)!;
     country = json['country'];
     population = json['population'];
     timezone = json['timezone'];

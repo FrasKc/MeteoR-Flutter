@@ -2,7 +2,7 @@ import 'package:meteor/models/meteo_forecast.dart';
 import 'package:meteor/services/customWeatherDetailCast.dart';
 
 List<Liste> customListDetailCast(List<dynamic> liste) {
-  List<Liste> ListeList = [];
+  List<Liste> listeList = [];
   for (dynamic object in liste) {
     Liste list = Liste(
       object["dt"],
@@ -14,9 +14,9 @@ List<Liste> customListDetailCast(List<dynamic> liste) {
       object["pop"].toDouble(),
       Sys.fromJson(object["sys"]),
       object["dt_txt"],
-      object['rain'] != null ? new Rain.fromJson(object['rain']) : null,
+      object['rain'] != null ? Rain.fromJson(object['rain']) : null,
     );
-    ListeList.add(list);
+    listeList.add(list);
   }
-  return ListeList;
+  return listeList;
 }

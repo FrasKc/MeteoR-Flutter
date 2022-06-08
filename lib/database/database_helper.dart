@@ -17,7 +17,6 @@ class SQLHelper {
 // created_at: the time that the item was created. It will be automatically handled by SQLite
 
   static Future<sql.Database> db() async {
-    print("on fait quelque chode");
     return sql.openDatabase(
       'database.db',
       version: 1,
@@ -29,7 +28,6 @@ class SQLHelper {
 
   // Create new item (journal)
   static Future<int> createItem(String cityName) async {
-    print("ajour de $cityName");
     final db = await SQLHelper.db();
 
     final data = {'cityName': cityName};

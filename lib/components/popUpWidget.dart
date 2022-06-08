@@ -5,7 +5,7 @@ import '../database/database_helper.dart';
 class PopUpCustom extends StatelessWidget {
   PopUpCustom(this.context, {Key? key}) : super(key: key);
   final BuildContext context;
-  TextEditingController _myController = TextEditingController();
+  final TextEditingController _myController = TextEditingController();
   void dispose() {
     _myController.dispose();
   }
@@ -26,7 +26,6 @@ class PopUpCustom extends StatelessWidget {
       actions: <Widget>[
         ElevatedButton(
           onPressed: () async {
-            print("OK");
             await SQLHelper.createItem(_myController.text)
                 .then((value) => Navigator.of(context).pop("okay"));
           },
