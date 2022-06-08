@@ -28,36 +28,46 @@ class _Days_InformationsState extends State<Days_Informations> {
         return Card(
             elevation: 1,
             color: Color.fromARGB(102, 255, 253, 253),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(readTimestampDay(data[index].dt)),
-                    Image.network(
-                      "http://openweathermap.org/img/wn/${data[index].weather[0].icon}@2x.png",
-                      width: 30,
-                      height: 30,
-                    ),
-                    SizedBox(
-                      width: 200,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                              "${convertTempToString(data[index].main.feelsLike)}°"),
-                          Text("${data[index].main.humidity.toString()}%"),
-                          Image.network(
-                              "https://cdn-icons-png.flaticon.com/512/850/850785.png",
-                              width: 20,
-                              height: 20)
-                        ],
+            child: Padding(
+              padding: const EdgeInsets.only(right: 10, left: 10),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(readTimestampDay(data[index].dt)),
+                      Image.network(
+                        "http://openweathermap.org/img/wn/${data[index].weather[0].icon}@2x.png",
+                        width: 30,
+                        height: 30,
                       ),
-                    )
-                  ],
-                ),
-                Text(data[index].weather[0].description),
-              ],
+                      SizedBox(
+                        width: 150,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                                "${convertTempToString(data[index].main.feelsLike)}°"),
+                            Container(
+                                child: Row(
+                              children: [
+                                Text(
+                                    "${data[index].main.humidity.toString()}%"),
+                                SizedBox(width: 10),
+                                Image.network(
+                                    "https://cdn-icons-png.flaticon.com/512/850/850785.png",
+                                    width: 20,
+                                    height: 20)
+                              ],
+                            )),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Text(data[index].weather[0].description),
+                ],
+              ),
             ));
       },
     );
