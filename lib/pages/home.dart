@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final double detailSize = MediaQuery.of(context).size.height * 0.65;
     final double detailSizePerHours = detailSize * 0.15;
-    final double detailSizePerDays = detailSize * 0.85;
+    final double detailSizePerDays = detailSize * 0.58;
     return Scaffold(
       key: _scaffoldKey,
       drawer: NavDrawer(widget.actualCity),
@@ -98,17 +98,27 @@ class _HomePageState extends State<HomePage> {
                                 height: detailSize,
                                 child: ListView(
                                   children: [
-                                    SizedBox(
-                                      height: detailSizePerHours,
-                                      child: Details_Information(
-                                          null, snapshot.data!),
+                                    Padding(
+                                      padding: const EdgeInsets.all(25.0),
+                                      child: SizedBox(
+                                        height: detailSizePerHours,
+                                        child: Details_Information(
+                                            null, snapshot.data!),
+                                      ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           right: 10.0, left: 10.0, top: 10),
                                       child: Container(
+                                          height: detailSizePerDays,
+                                          decoration: const BoxDecoration(
+                                            color: Color.fromARGB(
+                                                108, 255, 255, 255),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)),
+                                          ),
                                           padding: const EdgeInsets.only(
-                                              right: 10, left: 10),
+                                              top: 10.0, right: 10, left: 10),
                                           child: Column(
                                             children: [
                                               Row(
@@ -127,7 +137,8 @@ class _HomePageState extends State<HomePage> {
                                                 ],
                                               ),
                                               SizedBox(
-                                                height: detailSizePerDays,
+                                                height:
+                                                    detailSizePerDays * 0.88,
                                                 child: Days_Informations(
                                                     null, snapshot.data!),
                                               )
