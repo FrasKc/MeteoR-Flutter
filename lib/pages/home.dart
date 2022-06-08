@@ -42,11 +42,11 @@ class _HomePageState extends State<HomePage> {
     final double detailSizePerDays = detailSize * 0.85;
     return Scaffold(
       key: _scaffoldKey,
-      drawer: NavDrawer(null, widget.actualCity),
+      drawer: NavDrawer(widget.actualCity),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/FondPluie.gif'),
+            image: AssetImage('assets/images/fondNight.gif'),
             fit: BoxFit.fill,
           ),
         ),
