@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:meteor/components/popUpWidget.dart';
 import 'package:meteor/database/database_helper.dart';
 import 'package:meteor/services/ActualCity.dart';
@@ -7,7 +8,10 @@ import 'package:meteor/services/ActualCity.dart';
 import '../models/city.dart';
 
 class NavDrawer extends StatefulWidget {
-  NavDrawer(this.actualCity);
+  const NavDrawer(
+    Key? key,
+    this.actualCity,
+  ) : super(key: key);
   final ActualCity actualCity;
 
   @override
@@ -32,7 +36,7 @@ class _NavDrawerState extends State<NavDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Color.fromARGB(206, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(206, 255, 255, 255),
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
@@ -66,12 +70,13 @@ class _NavDrawerState extends State<NavDrawer> {
           SizedBox(
             height: MediaQuery.of(context).size.height,
             child: ListView.builder(
+              padding: EdgeInsets.zero,
               itemCount: citysList.length,
               itemBuilder: (BuildContext context, int index) {
                 return Dismissible(
                   key: Key(citysList[index].cityName),
                   background: Container(
-                    color: Color.fromARGB(120, 252, 43, 28),
+                    color: const Color.fromARGB(120, 252, 43, 28),
                     child: Padding(
                       padding: const EdgeInsets.all(15),
                       child: Row(
@@ -85,7 +90,7 @@ class _NavDrawerState extends State<NavDrawer> {
                     ),
                   ),
                   secondaryBackground: Container(
-                    color: Color.fromARGB(120, 252, 43, 28),
+                    color: const Color.fromARGB(120, 252, 43, 28),
                     child: Padding(
                       padding: const EdgeInsets.all(15),
                       child: Row(
@@ -99,7 +104,6 @@ class _NavDrawerState extends State<NavDrawer> {
                     ),
                   ),
                   onDismissed: (direction) async {
-                    // Remove the item from the data source.
                     if (direction == DismissDirection.endToStart ||
                         direction == DismissDirection.startToEnd) {
                       await SQLHelper.deleteItem(citysList[index].id);
@@ -117,7 +121,7 @@ class _NavDrawerState extends State<NavDrawer> {
                         style: GoogleFonts.lato(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 12, 12, 12))),
+                            color: const Color.fromARGB(255, 12, 12, 12))),
                     trailing: const Icon(
                       Icons.location_city,
                       color: Color.fromARGB(255, 0, 0, 0),

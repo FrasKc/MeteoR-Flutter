@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:meteor/services/customWeatherCast.dart';
 
 import '../models/meteo.dart';
@@ -30,7 +31,9 @@ Future<Meteo> getMeteoData(String city) async {
         jsonResponse["name"],
         jsonResponse["cod"]);
   } else {
-    print("Miam request failed with status: ${response.statusCode}");
+    if (kDebugMode) {
+      print("Request failed with status: ${response.statusCode}");
+    }
   }
   return meteo;
 }

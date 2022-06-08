@@ -3,14 +3,14 @@ import 'package:meteor/models/meteo.dart';
 import 'package:meteor/services/convert_temp_toString.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class General_information extends StatefulWidget {
-  General_information(Key? key, this.meteo) : super(key: key);
+class GeneralInformation extends StatefulWidget {
+  const GeneralInformation(Key? key, this.meteo) : super(key: key);
   final Meteo meteo;
   @override
-  State<General_information> createState() => _General_informationState();
+  State<GeneralInformation> createState() => _GeneralInformationState();
 }
 
-class _General_informationState extends State<General_information> {
+class _GeneralInformationState extends State<GeneralInformation> {
   @override
   Widget build(BuildContext context) {
     return Column(

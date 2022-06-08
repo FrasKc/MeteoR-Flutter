@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meteor/components/generals_informatio.dart';
+import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
+
+import 'package:meteor/components/charge_widget.dart';
+import 'package:meteor/components/dayCard.dart';
+import 'package:meteor/components/erreur_widget.dart';
 import 'package:meteor/components/navDrawer.dart';
 import 'package:meteor/models/meteo_forecast.dart';
-import 'package:meteor/services/details_services.dart';
 import 'package:meteor/services/ActualCity.dart';
-import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
-import '../components/andré.dart';
+import 'package:meteor/services/details_services.dart';
+
 import '../components/details_information.dart';
 import '../models/meteo.dart';
 import '../services/api_services.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage(this.actualCity);
+  const HomePage(
+    Key? key,
+    this.actualCity,
+  ) : super(key: key);
   final ActualCity actualCity;
   @override
   State<HomePage> createState() => _HomePageState();
@@ -29,11 +36,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final double detailSize = MediaQuery.of(context).size.height * 0.76;
-    final double detailSizePerHours = detailSize * 0.12;
+    final double detailSizePerHours = detailSize * 0.13;
     final double detailSizePerDays = detailSize * 0.85;
     return Scaffold(
       key: _scaffoldKey,
-      drawer: NavDrawer(widget.actualCity),
+      drawer: NavDrawer(null, widget.actualCity),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -42,11 +49,11 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         child: SafeArea(
-          minimum: EdgeInsets.only(top: 25),
+          minimum: const EdgeInsets.only(top: 25),
           top: false,
           bottom: false,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                 alignment: Alignment.topLeft,
@@ -71,25 +78,25 @@ class _HomePageState extends State<HomePage> {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
                               return const Center(
-                                child: Text("Chargement..."),
+                                child: ChargeWidget(),
                               );
                             } else if (snapshot.connectionState ==
                                     ConnectionState.done &&
                                 snapshot.data!.cod != 444) {
-                              return General_information(null, snapshot.data!);
+                              return GeneralInformation(null, snapshot.data!);
                             } else {
-                              return const Text('Erreur de chargement');
+                              return const ErreurWidget();
                             }
                           },
                         ),
                         const SizedBox(height: 10),
-                        FutureBuilder<Meteo_Forecast>(
+                        FutureBuilder<MeteoForecast>(
                           future: getMeteoDetailsData(city),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
                               return const Center(
-                                child: Text("Chargement..."),
+                                child: ChargeWidget(),
                               );
                             } else if (snapshot.connectionState ==
                                     ConnectionState.done &&
@@ -112,8 +119,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         child: Column(
                                           children: [
-                                            Container(
-                                                child: Row(
+                                            Row(
                                               children: [
                                                 const Icon(
                                                     Icons.watch_later_outlined,
@@ -123,16 +129,14 @@ class _HomePageState extends State<HomePage> {
                                                         fontSize: 20,
                                                         fontWeight:
                                                             FontWeight.w400,
-                                                        color: Color.fromARGB(
-                                                            255,
-                                                            255,
-                                                            255,
-                                                            255)))
+                                                        color: const Color
+                                                                .fromARGB(255,
+                                                            255, 255, 255)))
                                               ],
-                                            )),
-                                            Container(
+                                            ),
+                                            SizedBox(
                                               height: detailSizePerHours,
-                                              child: Details_Information(
+                                              child: DetailsInformation(
                                                   null, snapshot.data!),
                                             ),
                                           ],
@@ -164,17 +168,18 @@ class _HomePageState extends State<HomePage> {
                                                           fontSize: 20,
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              255,
-                                                              255,
-                                                              255)))
+                                                          color: const Color
+                                                                  .fromARGB(255,
+                                                              255, 255, 255)))
                                                 ],
+                                              ),
+                                              const SizedBox(
+                                                height: 5,
                                               ),
                                               SizedBox(
                                                 height:
                                                     detailSizePerDays * 0.50,
-                                                child: Days_Informations(
+                                                child: DaysInformations(
                                                     null, snapshot.data!),
                                               )
                                             ],
@@ -184,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               );
                             } else {
-                              return const Text('Erreur de chargement');
+                              return const ErreurWidget();
                             }
                           },
                         ),
