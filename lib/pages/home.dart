@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/FondPluie.gif'),
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
           ),
         ),
         child: SafeArea(

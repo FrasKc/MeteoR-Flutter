@@ -32,7 +32,9 @@ Future<Meteo> getMeteoData(String city) async {
         jsonResponse["cod"]);
   } else {
     if (kDebugMode) {
+
       print("Request failed with status: ${response.statusCode}");
+
     }
   }
   return meteo;
