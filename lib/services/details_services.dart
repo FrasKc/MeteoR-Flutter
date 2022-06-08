@@ -12,7 +12,7 @@ Future<MeteoForecast> getMeteoDetailsData(String city) async {
   //https://api.openweathermap.org/data/2.5/weather?q=lyon&appid=a9cfd822e4f8f61c11082ab1d62a6fda
 
   var url = Uri.https('api.openweathermap.org', "/data/2.5/forecast",
-      {"q": city, "appid": "a9cfd822e4f8f61c11082ab1d62a6fda"});
+      {"q": city, "appid": "cc1fb0360be232be857c78980b1a88f8"});
   var response = await http.get(url);
   if (response.statusCode == 200) {
     var jsonResponse = jsonDecode(response.body);

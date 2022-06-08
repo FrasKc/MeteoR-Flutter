@@ -3,12 +3,23 @@ class Meteo {
   Main main;
   Wind wind;
   Clouds clouds;
+  int dt;
+  Sys sys;
   int id;
   String name;
   int cod;
 
-  Meteo(this.weather, this.main, this.wind, this.clouds, this.id, this.name,
-      this.cod);
+  Meteo(
+    this.weather,
+    this.main,
+    this.wind,
+    this.clouds,
+    this.dt,
+    this.sys,
+    this.id,
+    this.name,
+    this.cod,
+  );
 }
 
 class Weather {
@@ -69,5 +80,33 @@ class Clouds {
 
   Clouds.fromJson(Map<String, dynamic> json) {
     all = json['all'];
+  }
+}
+
+class Sys {
+  late int type;
+  late int id;
+  late String country;
+  late int sunrise;
+  late int sunset;
+
+  Sys(this.type, this.id, this.country, this.sunrise, this.sunset);
+
+  Sys.fromJson(Map<String, dynamic> json) {
+    type = json['type'];
+    id = json['id'];
+    country = json['country'];
+    sunrise = json['sunrise'];
+    sunset = json['sunset'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['type'] = this.type;
+    data['id'] = this.id;
+    data['country'] = this.country;
+    data['sunrise'] = this.sunrise;
+    data['sunset'] = this.sunset;
+    return data;
   }
 }

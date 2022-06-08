@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meteor/components/generals_informatio.dart';
+import 'package:meteor/services/SelectFont.dart';
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
 import 'package:meteor/components/charge_widget.dart';
-import 'package:meteor/components/dayCard.dart';
+import 'package:meteor/components/day_card.dart';
 import 'package:meteor/components/erreur_widget.dart';
-import 'package:meteor/components/navDrawer.dart';
+import 'package:meteor/components/nav_drawer.dart';
 import 'package:meteor/models/meteo_forecast.dart';
 import 'package:meteor/services/ActualCity.dart';
 import 'package:meteor/services/details_services.dart';
@@ -29,10 +31,20 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final Color _boxColor =
       const Color.fromARGB(216, 100, 153, 252).withOpacity(0.1);
+  late String _imageUrl = "assets/images/fondSoleil.gif";
 
   @override
   void initState() {
     super.initState();
+    receiveMeteo();
+  }
+
+  void receiveMeteo() async {
+    String city = widget.actualCity.city.getValue();
+    var result = await getMeteoData(city).then((value) => SelectFond(value));
+    setState(() {
+      _imageUrl = result;
+    });
   }
 
   @override
@@ -40,13 +52,14 @@ class _HomePageState extends State<HomePage> {
     final double detailSize = MediaQuery.of(context).size.height * 0.76;
     final double detailSizePerHours = detailSize * 0.13;
     final double detailSizePerDays = detailSize * 0.85;
+
     return Scaffold(
       key: _scaffoldKey,
       drawer: NavDrawer(widget.actualCity),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/fondNight.gif'),
+            image: AssetImage(_imageUrl),
             fit: BoxFit.fill,
           ),
         ),
