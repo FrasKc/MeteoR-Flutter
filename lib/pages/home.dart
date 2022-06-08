@@ -28,22 +28,25 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final double detailSize = MediaQuery.of(context).size.height * 0.65;
-    final double detailSizePerHours = detailSize * 0.15;
-    final double detailSizePerDays = detailSize * 0.58;
+    final double detailSize = MediaQuery.of(context).size.height * 0.76;
+    final double detailSizePerHours = detailSize * 0.12;
+    final double detailSizePerDays = detailSize * 0.85;
     return Scaffold(
       key: _scaffoldKey,
       drawer: NavDrawer(widget.actualCity),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-                "https://i.pinimg.com/originals/0e/f3/bb/0ef3bb66d9216fffcea9022628f7bb26.gif"),
+            image: NetworkImage("https://s8.gifyu.com/images/Fond3.gif"),
             fit: BoxFit.cover,
           ),
         ),
         child: SafeArea(
+          minimum: EdgeInsets.only(top: 25),
+          top: false,
+          bottom: false,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 alignment: Alignment.topLeft,
@@ -57,32 +60,29 @@ class _HomePageState extends State<HomePage> {
                 builder: (BuildContext context, String city) {
                   String city = widget.actualCity.city.getValue();
                   if (city == "") {
-                    return Text("Aucune ville n'a été sélectionné");
+                    return const Text("Aucune ville n'a été sélectionné");
                   } else {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: FutureBuilder<Meteo>(
-                            future: getMeteoData(city),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const Center(
-                                  child: Text("Chargement..."),
-                                );
-                              } else if (snapshot.connectionState ==
-                                      ConnectionState.done &&
-                                  snapshot.data!.cod != 444) {
-                                return General_information(
-                                    null, snapshot.data!);
-                              } else {
-                                return const Text('Erreur de chargement');
-                              }
-                            },
-                          ),
+                        FutureBuilder<Meteo>(
+                          future: getMeteoData(city),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                child: Text("Chargement..."),
+                              );
+                            } else if (snapshot.connectionState ==
+                                    ConnectionState.done &&
+                                snapshot.data!.cod != 444) {
+                              return General_information(null, snapshot.data!);
+                            } else {
+                              return const Text('Erreur de chargement');
+                            }
+                          },
                         ),
+                        const SizedBox(height: 10),
                         FutureBuilder<Meteo_Forecast>(
                           future: getMeteoDetailsData(city),
                           builder: (context, snapshot) {
@@ -95,22 +95,53 @@ class _HomePageState extends State<HomePage> {
                                     ConnectionState.done &&
                                 snapshot.data!.cod != "444") {
                               return SizedBox(
-                                height: detailSize,
+                                height: detailSizePerDays,
                                 child: ListView(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(25.0),
-                                      child: SizedBox(
-                                        height: detailSizePerHours,
-                                        child: Details_Information(
-                                            null, snapshot.data!),
+                                      padding: const EdgeInsets.only(
+                                          right: 10, left: 10),
+                                      child: Container(
+                                        padding: const EdgeInsets.only(
+                                            right: 10, left: 10),
+                                        decoration: const BoxDecoration(
+                                          color: Color.fromARGB(
+                                              108, 255, 255, 255),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                                child: Row(
+                                              children: [
+                                                const Icon(
+                                                    Icons.watch_later_outlined,
+                                                    color: Colors.white),
+                                                Text("Hour by hour forecast",
+                                                    style: GoogleFonts.lato(
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: const Color
+                                                                .fromARGB(
+                                                            255, 0, 0, 0)))
+                                              ],
+                                            )),
+                                            Container(
+                                              height: detailSizePerHours,
+                                              child: Details_Information(
+                                                  null, snapshot.data!),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           right: 10.0, left: 10.0, top: 10),
                                       child: Container(
-                                          height: detailSizePerDays,
+                                          height: detailSizePerDays * 0.6,
                                           decoration: const BoxDecoration(
                                             color: Color.fromARGB(
                                                 108, 255, 255, 255),
@@ -138,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                               SizedBox(
                                                 height:
-                                                    detailSizePerDays * 0.88,
+                                                    detailSizePerDays * 0.50,
                                                 child: Days_Informations(
                                                     null, snapshot.data!),
                                               )
