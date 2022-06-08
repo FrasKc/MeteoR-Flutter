@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:meteor/components/popUpWidget.dart';
 import 'package:meteor/database/database_helper.dart';
 import 'package:meteor/services/ActualCity.dart';
@@ -31,6 +32,7 @@ class _NavDrawerState extends State<NavDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Color.fromARGB(206, 255, 255, 255),
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
@@ -97,7 +99,11 @@ class _NavDrawerState extends State<NavDrawer> {
                     }
                   },
                   child: ListTile(
-                    title: Text(citysList[index].cityName),
+                    title: Text(citysList[index].cityName.toUpperCase(),
+                        style: GoogleFonts.lato(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 12, 12, 12))),
                     trailing: const Icon(
                       Icons.location_city,
                       color: Color.fromARGB(255, 0, 0, 0),

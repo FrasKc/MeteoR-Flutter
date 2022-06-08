@@ -121,7 +121,9 @@ class _HomePageState extends State<HomePage> {
                                                           fontSize: 20,
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          color: Colors.white))
+                                                          color: const Color
+                                                                  .fromARGB(
+                                                              255, 0, 0, 0)))
                                                 ],
                                               ),
                                               SizedBox(

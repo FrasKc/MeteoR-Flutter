@@ -17,17 +17,19 @@ class _meteoCardState extends State<meteoCard> {
     return SizedBox(
       width: 100,
       child: Card(
+          elevation: 1,
+          color: Color.fromARGB(102, 255, 253, 253),
           child: Column(
-        children: [
-          Text(readTimestampHour(widget.liste.dt)),
-          Image.network(
-            "http://openweathermap.org/img/wn/${widget.liste.weather[0].icon}@2x.png",
-            width: 30,
-            height: 30,
-          ),
-          Text("${convertTempToString(widget.liste.main.temp)}°"),
-        ],
-      )),
+            children: [
+              Text(readTimestampHour(widget.liste.dt)),
+              Image.network(
+                "http://openweathermap.org/img/wn/${widget.liste.weather[0].icon}@2x.png",
+                width: 30,
+                height: 30,
+              ),
+              Text("${convertTempToString(widget.liste.main.temp)}°"),
+            ],
+          )),
     );
   }
 }

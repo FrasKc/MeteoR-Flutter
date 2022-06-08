@@ -25,33 +25,35 @@ class _Days_InformationsState extends State<Days_Informations> {
       itemCount: data.length,
       itemBuilder: (BuildContext context, int index) {
         return Card(
+            elevation: 1,
+            color: Color.fromARGB(102, 255, 253, 253),
             child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(readTimestampDay(data[index].dt)),
-                Image.network(
-                  "http://openweathermap.org/img/wn/${data[index].weather[0].icon}@2x.png",
-                  width: 30,
-                  height: 30,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(readTimestampDay(data[index].dt)),
+                    Image.network(
+                      "http://openweathermap.org/img/wn/${data[index].weather[0].icon}@2x.png",
+                      width: 30,
+                      height: 30,
+                    ),
+                    SizedBox(
+                      width: 100,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                              "${convertTempToString(data[index].main.feelsLike)}°"),
+                          Text("${data[index].main.humidity.toString()}%"),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
-                SizedBox(
-                  width: 100,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                          "${convertTempToString(data[index].main.feelsLike)}°"),
-                      Text("${data[index].main.humidity.toString()}%"),
-                    ],
-                  ),
-                )
+                Text(data[index].weather[0].description),
               ],
-            ),
-            Text(data[index].weather[0].description),
-          ],
-        ));
+            ));
       },
     );
   }
