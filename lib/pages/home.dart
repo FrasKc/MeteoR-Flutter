@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meteor/components/generals_informatio.dart';
-import 'package:meteor/services/SelectFont.dart';
+import 'package:meteor/services/SelectFond.dart';
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
 import 'package:meteor/components/charge_widget.dart';

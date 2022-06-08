@@ -6,7 +6,7 @@ List<Liste> daysFilter(List<Liste> list) {
   late List<String> semiResult = [];
   for (Liste data in list) {
     if (semiResult.contains(readTimestampDay(data.dt)) == false &&
-        readTimestampHour(data.dt) == "14:00") {
+        readTimestampHourClassic(data.dt) == "14:00") {
       semiResult.add(readTimestampDay(data.dt));
       resultListe.add(data);
     }

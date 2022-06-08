@@ -6,6 +6,7 @@ class Meteo {
   int dt;
   Sys sys;
   int id;
+  int timeZone;
   String name;
   int cod;
 
@@ -17,6 +18,7 @@ class Meteo {
     this.dt,
     this.sys,
     this.id,
+    this.timeZone,
     this.name,
     this.cod,
   );

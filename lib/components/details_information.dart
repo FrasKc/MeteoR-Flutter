@@ -22,7 +22,7 @@ class _DetailsInformationState extends State<DetailsInformation> {
       itemBuilder: (BuildContext context, int index) {
         return Padding(
             padding: const EdgeInsets.only(right: 10),
-            child: MeteoCard(null, widget.meteoDetail.list![index]));
+            child: MeteoCard(null, widget.meteoDetail, index));
       },
     );
   }

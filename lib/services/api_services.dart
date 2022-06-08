@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 Future<Meteo> getMeteoData(String city) async {
   Meteo meteo = Meteo([], Main(0, 0, 0, 0, 0, 0), Wind(0, 0, 0), Clouds(0), 0,
-      Sys(0, 0, "", 0, 0), 0, "", 444);
+      Sys(0, 0, "", 0, 0), 0, 0, "", 444);
   //https://jsonplaceholder.typicode.com/genre
   //https://api.openweathermap.org/data/2.5/weather?q=lyon&appid=a9cfd822e4f8f61c11082ab1d62a6fda
 
@@ -31,6 +31,7 @@ Future<Meteo> getMeteoData(String city) async {
         jsonResponse["dt"],
         sysConvert,
         jsonResponse["id"],
+        jsonResponse["timezone"],
         jsonResponse["name"],
         jsonResponse["cod"]);
   } else {
