@@ -19,7 +19,7 @@ class _MeteoCardState extends State<MeteoCard> {
       width: 110,
       child: Card(
           elevation: 1,
-          color: const Color.fromARGB(102, 255, 253, 253),
+          color: const Color.fromARGB(102, 255, 253, 253).withOpacity(0.1),
           child: Column(
             children: [
               Text(readTimestampHour(widget.liste.dt),

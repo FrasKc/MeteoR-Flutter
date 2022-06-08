@@ -27,6 +27,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final Color _boxColor =
+      const Color.fromARGB(216, 100, 153, 252).withOpacity(0.1);
 
   @override
   void initState() {
@@ -110,11 +112,14 @@ class _HomePageState extends State<HomePage> {
                                           right: 10, left: 10),
                                       child: Container(
                                         padding: const EdgeInsets.only(
-                                            right: 10, left: 10),
-                                        decoration: const BoxDecoration(
-                                          color: Color.fromARGB(
-                                              108, 255, 255, 255),
-                                          borderRadius: BorderRadius.all(
+                                          top: 5,
+                                          right: 10,
+                                          left: 10,
+                                          bottom: 5,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: _boxColor,
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(10.0)),
                                         ),
                                         child: Column(
@@ -148,11 +153,11 @@ class _HomePageState extends State<HomePage> {
                                           right: 10.0, left: 10.0, top: 10),
                                       child: Container(
                                           height: detailSizePerDays * 0.6,
-                                          decoration: const BoxDecoration(
-                                            color: Color.fromARGB(
-                                                108, 255, 255, 255),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10.0)),
+                                          decoration: BoxDecoration(
+                                            color: _boxColor,
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(10.0)),
                                           ),
                                           padding: const EdgeInsets.only(
                                               top: 10.0, right: 10, left: 10),
@@ -165,12 +170,13 @@ class _HomePageState extends State<HomePage> {
                                                       color: Colors.white),
                                                   Text(" 5 day forecast",
                                                       style: GoogleFonts.lato(
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: const Color
-                                                                  .fromARGB(255,
-                                                              255, 255, 255)))
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: const Color
+                                                                .fromARGB(
+                                                            255, 255, 255, 255),
+                                                      ))
                                                 ],
                                               ),
                                               const SizedBox(

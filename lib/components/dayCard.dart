@@ -26,7 +26,7 @@ class _DaysInformationsState extends State<DaysInformations> {
       itemBuilder: (BuildContext context, int index) {
         return Card(
           elevation: 1,
-          color: const Color.fromARGB(102, 255, 253, 253),
+          color: const Color.fromARGB(102, 255, 253, 253).withOpacity(0.1),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
