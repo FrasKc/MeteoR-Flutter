@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meteor/components/meteo_card.dart';
 import 'package:meteor/models/meteo_forecast.dart';
 import 'package:meteor/services/DaysFilter.dart';
+import 'package:flutter/src/material/icons.dart';
 import 'package:meteor/services/TimeStampeToString.dart';
 import 'package:meteor/services/convert_temp_toString.dart';
 
@@ -39,13 +40,17 @@ class _Days_InformationsState extends State<Days_Informations> {
                       height: 30,
                     ),
                     SizedBox(
-                      width: 100,
+                      width: 200,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
                               "${convertTempToString(data[index].main.feelsLike)}°"),
                           Text("${data[index].main.humidity.toString()}%"),
+                          Image.network(
+                              "https://cdn-icons-png.flaticon.com/512/850/850785.png",
+                              width: 20,
+                              height: 20)
                         ],
                       ),
                     )
