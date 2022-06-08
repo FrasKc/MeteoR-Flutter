@@ -78,9 +78,9 @@ class _Days_InformationsState extends State<Days_Informations> {
                       )
                     ],
                   ),
-                  Text(data[index].weather[0].description,
+                  Text(data[index].weather[0].description.toUpperCase(),
                       style: GoogleFonts.lato(
-                          fontSize: 17,
+                          fontSize: 15,
                           fontWeight: FontWeight.w400,
                           color: Color.fromARGB(255, 255, 255, 255))),
                 ],

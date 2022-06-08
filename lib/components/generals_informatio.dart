@@ -28,7 +28,7 @@ class _General_informationState extends State<General_information> {
                 fontWeight: FontWeight.w400,
                 color: Colors.white)),
         const SizedBox(height: 10),
-        Text(widget.meteo.weather[0].description,
+        Text(widget.meteo.weather[0].description.toUpperCase(),
             style: GoogleFonts.lato(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
@@ -39,7 +39,7 @@ class _General_informationState extends State<General_information> {
           children: [
             const Icon(Icons.air_rounded, color: Colors.white),
             const SizedBox(width: 10),
-            Text("${(widget.meteo.wind.speed * 3.6).toString()}Km/h",
+            Text("${(widget.meteo.wind.speed * 3.6).toStringAsFixed(1)} Km/h",
                 style: GoogleFonts.lato(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
