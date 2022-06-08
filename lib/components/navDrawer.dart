@@ -61,18 +61,31 @@ class _NavDrawerState extends State<NavDrawer> {
                     });
                   }
                 },
-                child: Text("Ajouter une ville")),
+                child: const Text("Ajouter une ville")),
           ),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height,
             child: ListView.builder(
               itemCount: citysList.length,
               itemBuilder: (BuildContext context, int index) {
                 return Dismissible(
                   key: Key(citysList[index].cityName),
-                  background: Container(color: Colors.white, child: null),
+                  background: Container(
+                    color: Color.fromARGB(120, 244, 67, 54),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          Icon(Icons.delete, color: Colors.white),
+                          Text('Move to trash',
+                              style: TextStyle(color: Colors.white)),
+                        ],
+                      ),
+                    ),
+                  ),
                   secondaryBackground: Container(
-                    color: Colors.red,
+                    color: Color.fromARGB(120, 244, 67, 54),
                     child: Padding(
                       padding: const EdgeInsets.all(15),
                       child: Row(
@@ -87,10 +100,11 @@ class _NavDrawerState extends State<NavDrawer> {
                   ),
                   onDismissed: (direction) async {
                     // Remove the item from the data source.
-                    if (direction == DismissDirection.endToStart) {
+                    if (direction == DismissDirection.endToStart ||
+                        direction == DismissDirection.startToEnd) {
                       await SQLHelper.deleteItem(citysList[index].id);
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Successfully deleted a journal!'),
+                        content: Text('Successfully deleted city'),
                       ));
                       _refreshCitys();
                     } else {
