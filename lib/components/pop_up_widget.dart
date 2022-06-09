@@ -26,8 +26,12 @@ class PopUpCustom extends StatelessWidget {
       actions: <Widget>[
         ElevatedButton(
           onPressed: () async {
-            await SQLHelper.createItem(_myController.text)
-                .then((value) => Navigator.of(context).pop("okay"));
+            if (_myController.text != "" && _myController.text != " ") {
+              await SQLHelper.createItem(_myController.text)
+                  .then((value) => Navigator.of(context).pop("okay"));
+            } else {
+              Navigator.of(context).pop("PasOkay");
+            }
           },
           child: const Text('OK'),
         ),

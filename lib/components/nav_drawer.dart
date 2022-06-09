@@ -61,7 +61,7 @@ class _NavDrawerState extends State<NavDrawer> {
                     context: context,
                     builder: (BuildContext context) => PopUpCustom(context),
                   );
-                  if (result != "") {
+                  if (result == "okay") {
                     setState(() {
                       _refreshCitys();
                     });
