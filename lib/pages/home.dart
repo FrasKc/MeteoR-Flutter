@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meteor/components/generals_informatio.dart';
-import 'package:meteor/services/SelectFond.dart';
+import 'package:meteor/services/select_fond.dart';
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
 import 'package:meteor/components/charge_widget.dart';
@@ -10,7 +10,7 @@ import 'package:meteor/components/day_card.dart';
 import 'package:meteor/components/erreur_widget.dart';
 import 'package:meteor/components/nav_drawer.dart';
 import 'package:meteor/models/meteo_forecast.dart';
-import 'package:meteor/services/ActualCity.dart';
+import 'package:meteor/services/actual_city.dart';
 import 'package:meteor/services/details_services.dart';
 
 import '../components/details_information.dart';
@@ -41,10 +41,9 @@ class _HomePageState extends State<HomePage> {
 
   void receiveMeteo() async {
     String city = widget.actualCity.city.getValue();
-    var result = await getMeteoData(city).then((value) => SelectFond(value));
-    setState(() {
-      _imageUrl = result;
-    });
+    var result = await getMeteoData(city).then((value) => selectFond(value));
+    _imageUrl = result;
+    setState(() {});
   }
 
   @override
@@ -55,7 +54,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       key: _scaffoldKey,
-      drawer: NavDrawer(widget.actualCity),
+      drawer: NavDrawer(null, widget.actualCity),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -73,9 +72,10 @@ class _HomePageState extends State<HomePage> {
               Container(
                 alignment: Alignment.topLeft,
                 child: IconButton(
-                  icon: const Icon(Icons.menu_open, color: Colors.white),
-                  onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-                ),
+                    icon: const Icon(Icons.menu_open, color: Colors.white),
+                    onPressed: () {
+                      _scaffoldKey.currentState?.openDrawer();
+                    }),
               ),
               PreferenceBuilder<String>(
                 preference: widget.actualCity.city,

@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:meteor/components/popUpWidget.dart';
+import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
+
+import 'package:meteor/components/pop_up_widget.dart';
 import 'package:meteor/database/database_helper.dart';
-import 'package:meteor/services/ActualCity.dart';
+import 'package:meteor/pages/home.dart';
+import 'package:meteor/services/actual_city.dart';
 
 import '../models/city.dart';
 
 class NavDrawer extends StatefulWidget {
-  NavDrawer(this.actualCity);
+  const NavDrawer(
+    Key? key,
+    this.actualCity,
+  ) : super(key: key);
   final ActualCity actualCity;
 
   @override
@@ -32,7 +38,7 @@ class _NavDrawerState extends State<NavDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Color.fromARGB(255, 40, 56, 77),
+      backgroundColor: const Color.fromARGB(255, 40, 56, 77),
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
@@ -64,7 +70,7 @@ class _NavDrawerState extends State<NavDrawer> {
                 child: const Text("Ajouter une ville"),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 49, 65, 101)),
+                      const Color.fromARGB(255, 49, 65, 101)),
                 )),
           ),
           SizedBox(
@@ -75,7 +81,7 @@ class _NavDrawerState extends State<NavDrawer> {
                 return Dismissible(
                   key: Key(citysList[index].cityName),
                   background: Container(
-                    color: Color.fromARGB(120, 252, 43, 28),
+                    color: const Color.fromARGB(120, 252, 43, 28),
                     child: Padding(
                       padding: const EdgeInsets.all(15),
                       child: Row(
@@ -89,7 +95,7 @@ class _NavDrawerState extends State<NavDrawer> {
                     ),
                   ),
                   secondaryBackground: Container(
-                    color: Color.fromARGB(120, 252, 43, 28),
+                    color: const Color.fromARGB(120, 252, 43, 28),
                     child: Padding(
                       padding: const EdgeInsets.all(15),
                       child: Row(
@@ -121,7 +127,7 @@ class _NavDrawerState extends State<NavDrawer> {
                         style: GoogleFonts.lato(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 255, 255, 255))),
+                            color: const Color.fromARGB(255, 255, 255, 255))),
                     trailing: const Icon(
                       Icons.location_city,
                       color: Color.fromARGB(255, 255, 255, 255),
@@ -130,7 +136,16 @@ class _NavDrawerState extends State<NavDrawer> {
                     onTap: () async {
                       await widget.actualCity.city
                           .setValue(citysList[index].cityName)
-                          .then((value) => Navigator.pop(context));
+                          .then((value) async {
+                        final preferences =
+                            await StreamingSharedPreferences.instance;
+                        final city = ActualCity(preferences);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomePage(null, city)),
+                        );
+                      });
                     },
                   ),
                 );

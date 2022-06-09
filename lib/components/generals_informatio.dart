@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meteor/models/meteo.dart';
-import 'package:meteor/services/convert_temp_toString.dart';
+import 'package:meteor/services/convert_temp_to_string.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GeneralInformation extends StatefulWidget {

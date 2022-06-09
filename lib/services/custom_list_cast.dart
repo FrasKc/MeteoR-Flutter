@@ -1,5 +1,5 @@
 import 'package:meteor/models/meteo_forecast.dart';
-import 'package:meteor/services/customWeatherDetailCast.dart';
+import 'package:meteor/services/custom_weather_detail_cast.dart';
 
 List<Liste> customListDetailCast(List<dynamic> liste) {
   List<Liste> listeList = [];

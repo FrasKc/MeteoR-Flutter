@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meteor/models/meteo_forecast.dart';
-import 'package:meteor/services/TimeStampeToString.dart';
-import 'package:meteor/services/convert_temp_toString.dart';
+import 'package:meteor/services/time_stampe_to_string.dart';
+import 'package:meteor/services/convert_temp_to_string.dart';
 
 class MeteoCard extends StatefulWidget {
   const MeteoCard(Key? key, this.meteo, this.index) : super(key: key);

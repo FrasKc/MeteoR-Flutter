@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:meteor/services/customWeatherCast.dart';
+import 'package:meteor/services/custom_weather_cast.dart';
 
 import '../models/meteo.dart';
 import 'package:http/http.dart' as http;

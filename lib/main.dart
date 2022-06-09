@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meteor/pages/home.dart';
-import 'package:meteor/services/ActualCity.dart';
+import 'package:meteor/services/actual_city.dart';
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
 Future<void> main() async {
@@ -11,7 +11,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp(this.city, {Key? key}) : super(key: key);
+  const MyApp(this.city, {Key? key}) : super(key: key);
   final ActualCity city;
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meteor/models/meteo_forecast.dart';
-import 'package:meteor/services/DaysFilter.dart';
-import 'package:meteor/services/TimeStampeToString.dart';
-import 'package:meteor/services/convert_temp_toString.dart';
+import 'package:meteor/services/days_filter.dart';
+import 'package:meteor/services/time_stampe_to_string.dart';
+import 'package:meteor/services/convert_temp_to_string.dart';
 
 class DaysInformations extends StatefulWidget {
   const DaysInformations(Key? key, this.meteoDetail)

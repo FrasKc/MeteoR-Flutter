@@ -1,7 +1,6 @@
 import 'package:meteor/models/meteo.dart';
-import 'package:meteor/services/TimeStampeToString.dart';
 
-String SelectFond(Meteo weather) {
+String selectFond(Meteo weather) {
   DateTime lever = DateTime.fromMillisecondsSinceEpoch(
       (weather.sys.sunrise + weather.timeZone) * 1000,
       isUtc: true);
@@ -11,13 +10,8 @@ String SelectFond(Meteo weather) {
   DateTime actuel = DateTime.fromMillisecondsSinceEpoch(
       (weather.dt + weather.timeZone) * 1000,
       isUtc: true);
-  print(weather.timeZone);
-  print(coucher);
-  print(actuel);
-  print(lever);
-  print(weather.name);
+
   if (coucher.hour > actuel.hour && actuel.hour > lever.hour) {
-    print(weather.weather[0].icon);
     switch (weather.weather[0].icon) {
       case "01d":
       case "02d":
