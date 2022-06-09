@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meteor/components/generals_informatio.dart';
+import 'package:meteor/components/no_select_city.dart';
 import 'package:meteor/services/select_fond.dart';
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
@@ -82,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                 builder: (BuildContext context, String city) {
                   String city = widget.actualCity.city.getValue();
                   if (city == "") {
-                    return const Text("Aucune ville n'a été sélectionné");
+                    return const NoCityWidget();
                   } else {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.start,
