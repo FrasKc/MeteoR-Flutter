@@ -140,11 +140,7 @@ class _NavDrawerState extends State<NavDrawer> {
                         final preferences =
                             await StreamingSharedPreferences.instance;
                         final city = ActualCity(preferences);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HomePage(null, city)),
-                        );
+                        Navigator.pop(context);
                       });
                     },
                   ),

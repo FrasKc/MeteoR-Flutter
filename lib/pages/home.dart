@@ -56,6 +56,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: NavDrawer(null, widget.actualCity),
+      onDrawerChanged: (val) {
+        print(val);
+        if (!val) {
+          receiveMeteo();
+        }
+      },
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
